@@ -7,9 +7,13 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-          <FinancialChart />
-      </div>
+        <div className="app">
+          <div className="app__content">
+            <FinancialChart />
+          </div>
+          <div className="app__layout">
+          </div>
+        </div>
     );
   }
 }

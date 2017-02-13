@@ -15,7 +15,7 @@ module.exports = {
     watch: NODE_ENV == 'development',
     resolve: {
         modulesDirectories: ['node_modules', './src'],
-        extensions: ['', '.js', '.less', '.jsx']
+        extensions: ['', '.js', '.jsx']
     },
     resolveLoader: {
         modulesDirectories: ['node_modules'],
@@ -39,7 +39,7 @@ module.exports = {
 
     devServer: {
         host: 'localhost',
-        port: 8080,
+        port: 8082,
         contentBase: __dirname + '/public',
         hot: true
     }

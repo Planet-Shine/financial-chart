@@ -1,4 +1,26 @@
-.App {
-  height: 100px;
-  width: 200px;
+
+.app,
+.app__content,
+.app__layout {
+  height: 280px;
+  width: 864px;
+}
+
+.app {
+  position: relative;
+  margin: 50px auto 0 auto;
+}
+
+.app__content {
+  position: relative;
+  z-index: 1;
+}
+
+.app__layout {
+  opacity: 0.3;
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url('./layout.png');
 }
