@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx" line="165" mnemonic="9" />
+    <bookmark url="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx" line="212" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="066e1be8-4c1b-458e-abf1-35923999332a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FinancialChart/months.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FinancialChart/styles/axisBox.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FinancialChart/styles/root.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FinancialChart/styles/text.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FinancialChart/styles/valueHintBox.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/FinancialChart/styles/yearHintBox.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/data/exchangeRates.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utils/math.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/utils/dom.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/App.js" afterPath="$PROJECT_DIR$/src/components/App/App.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/App/App.less" afterPath="$PROJECT_DIR$/src/components/App/App.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx" afterPath="$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.less" afterPath="$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/data/exchangeRates.js" afterPath="$PROJECT_DIR$/src/data/exchangeRates.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todo/todo.txt" afterPath="$PROJECT_DIR$/todo/todo.txt" />
     </list>
     <ignored path="currentcy-graph.iws" />
@@ -38,66 +33,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FinancialChart.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
-              <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
-              <folding>
-                <element signature="e#1#53#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="math.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/math.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="15" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="layout.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/App/layout.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="valueHintBox.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/styles/valueHintBox.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="timeHintBox.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/styles/timeHintBox.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="months.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/months.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -109,21 +45,99 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.less" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/App/App.less">
+      <file leaf-file-name="FinancialChart.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+            <state relative-caret-position="266">
+              <caret line="261" column="10" selection-start-line="261" selection-start-column="10" selection-end-line="261" selection-end-column="10" />
+              <folding>
+                <element signature="e#1#53#0" expanded="true" />
+                <element signature="n#!!block;n#renderTimeHints#0;n#FinancialChart#0" expanded="false" />
+                <element signature="n#!!block;n#renderYearHint#0;n#FinancialChart#0" expanded="false" />
+                <element signature="n#!!block;n#renderValueHints#0;n#FinancialChart#0" expanded="false" />
+                <marker date="1487098067146" expanded="true" signature="6644:6685" placeholder="..." />
+                <marker date="1487098067146" expanded="true" signature="12565:12644" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dom.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/dom.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="yearHintBox.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/styles/yearHintBox.js">
+      <file leaf-file-name="FinancialChart.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.less">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="axisBox.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/styles/axisBox.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/App.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="template.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/template.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="60" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
+              <folding>
+                <element signature="n#g#0;n#g#9;n#svg#0;n#!!top" expanded="false" />
+                <element signature="n#path#0;n#g#0;n#g#9;n#svg#0;n#!!top" expanded="false" />
+                <element signature="n#path#1;n#g#0;n#g#9;n#svg#0;n#!!top" expanded="false" />
+                <element signature="n#g#1;n#g#9;n#svg#0;n#!!top" expanded="false" />
+                <element signature="n#path#0;n#g#1;n#g#9;n#svg#0;n#!!top" expanded="false" />
+                <element signature="n#g#2;n#g#9;n#svg#0;n#!!top" expanded="false" />
+                <element signature="n#path#0;n#g#2;n#g#9;n#svg#0;n#!!top" expanded="false" />
+                <element signature="n#path#1;n#g#2;n#g#9;n#svg#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/App/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="todo.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/todo/todo.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="63" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -132,8 +146,8 @@
       <file leaf-file-name="exchangeRates.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/data/exchangeRates.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+            <state relative-caret-position="68">
+              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -149,24 +163,25 @@
       <list>
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
-        <option value="$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.less" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/Palette.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/Text.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/TimeHintBox.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/months.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/yearHint.js" />
-        <option value="$PROJECT_DIR$/src/components/App/App.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/valueHint.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/text.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/asixBox.js" />
-        <option value="$PROJECT_DIR$/todo/todo.txt" />
-        <option value="$PROJECT_DIR$/src/data/exchangeRates.js" />
         <option value="$PROJECT_DIR$/src/utils/math.js" />
-        <option value="$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx" />
-        <option value="$PROJECT_DIR$/src/components/App/App.less" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/yearHintBox.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/valueHintBox.js" />
         <option value="$PROJECT_DIR$/src/components/FinancialChart/styles/timeHintBox.js" />
+        <option value="$PROJECT_DIR$/src/data/exchangeRates.js" />
+        <option value="$PROJECT_DIR$/src/components/App/App.js" />
+        <option value="$PROJECT_DIR$/todo/todo.txt" />
+        <option value="$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.less" />
+        <option value="$PROJECT_DIR$/src/utils/dom.js" />
+        <option value="$PROJECT_DIR$/src/components/App/App.less" />
+        <option value="$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx" />
       </list>
     </option>
   </component>
@@ -178,10 +193,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="273" />
-    <option name="y" value="480" />
-    <option name="width" value="1425" />
-    <option name="height" value="879" />
+    <option name="x" value="541" />
+    <option name="y" value="441" />
+    <option name="width" value="1566" />
+    <option name="height" value="927" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -343,7 +358,7 @@
       <workItem from="1487001310241" duration="187000" />
       <workItem from="1487018895997" duration="341000" />
       <workItem from="1487019948808" duration="2094000" />
-      <workItem from="1487051291840" duration="20122000" />
+      <workItem from="1487051291840" duration="37030000" />
     </task>
     <task id="LOCAL-00001" summary="Folder name change">
       <created>1487019228182</created>
@@ -363,21 +378,21 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25823000" />
+    <option name="totallyTimeSpent" value="42731000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="273" y="480" width="1425" height="879" extended-state="0" />
+    <frame x="541" y="441" width="1566" height="927" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24224946" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19109948" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32931727" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931727" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31057563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29685536" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -410,7 +425,9 @@
     <option name="LAST_COMMIT_MESSAGE" value="First render." />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -438,6 +455,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#1#53#0" expanded="true" />
+            <element signature="n#!!block;n#renderTimeHints#0;n#FinancialChart#0" expanded="false" />
+            <element signature="n#!!block;n#renderYearHint#0;n#FinancialChart#0" expanded="false" />
+            <element signature="n#!!block;n#renderValueHints#0;n#FinancialChart#0" expanded="false" />
+            <marker date="1487098067146" expanded="true" signature="6644:6685" placeholder="..." />
+            <marker date="1487098067146" expanded="true" signature="12565:12644" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -447,7 +469,7 @@
         <state relative-caret-position="68">
           <caret line="4" column="9" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="9" />
           <folding>
-            <element signature="e#0#41#0" expanded="false" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -483,6 +505,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#1#53#0" expanded="true" />
+            <element signature="n#!!block;n#renderTimeHints#0;n#FinancialChart#0" expanded="false" />
+            <element signature="n#!!block;n#renderYearHint#0;n#FinancialChart#0" expanded="false" />
+            <element signature="n#!!block;n#renderValueHints#0;n#FinancialChart#0" expanded="false" />
+            <marker date="1487098067146" expanded="true" signature="6644:6685" placeholder="..." />
+            <marker date="1487098067146" expanded="true" signature="12565:12644" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -528,6 +555,11 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#1#53#0" expanded="true" />
+            <element signature="n#!!block;n#renderTimeHints#0;n#FinancialChart#0" expanded="false" />
+            <element signature="n#!!block;n#renderYearHint#0;n#FinancialChart#0" expanded="false" />
+            <element signature="n#!!block;n#renderValueHints#0;n#FinancialChart#0" expanded="false" />
+            <marker date="1487098067146" expanded="true" signature="6644:6685" placeholder="..." />
+            <marker date="1487098067146" expanded="true" signature="12565:12644" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -596,32 +628,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/template.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="114" column="12" selection-start-line="113" selection-start-column="4" selection-end-line="124" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="14" selection-start-line="16" selection-start-column="14" selection-end-line="16" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/styles/root.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -649,40 +655,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/todo/todo.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/styles/axisBox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/exchangeRates.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
-          <folding>
-            <element signature="e#1#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/math.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -694,14 +666,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/App/layout.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/App/App.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/styles/yearHintBox.js">
@@ -724,7 +688,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-          <folding />
+          <folding>
+            <marker date="1487077514390" expanded="true" signature="17:63" placeholder="{&quot;left&quot;: 33...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -742,6 +708,96 @@
           <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/template.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="60" selection-start-line="15" selection-start-column="60" selection-end-line="15" selection-end-column="60" />
+          <folding>
+            <element signature="n#g#0;n#g#9;n#svg#0;n#!!top" expanded="false" />
+            <element signature="n#path#0;n#g#0;n#g#9;n#svg#0;n#!!top" expanded="false" />
+            <element signature="n#path#1;n#g#0;n#g#9;n#svg#0;n#!!top" expanded="false" />
+            <element signature="n#g#1;n#g#9;n#svg#0;n#!!top" expanded="false" />
+            <element signature="n#path#0;n#g#1;n#g#9;n#svg#0;n#!!top" expanded="false" />
+            <element signature="n#g#2;n#g#9;n#svg#0;n#!!top" expanded="false" />
+            <element signature="n#path#0;n#g#2;n#g#9;n#svg#0;n#!!top" expanded="false" />
+            <element signature="n#path#1;n#g#2;n#g#9;n#svg#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="33" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/todo/todo.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="63" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/exchangeRates.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/styles/axisBox.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="15" selection-start-line="5" selection-start-column="15" selection-end-line="5" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/dom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="32" column="53" selection-start-line="32" selection-start-column="53" selection-end-line="32" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/App/App.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="36" selection-start-line="6" selection-start-column="36" selection-end-line="6" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/FinancialChart/FinancialChart.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="261" column="10" selection-start-line="261" selection-start-column="10" selection-end-line="261" selection-end-column="10" />
+          <folding>
+            <element signature="e#1#53#0" expanded="true" />
+            <element signature="n#!!block;n#renderTimeHints#0;n#FinancialChart#0" expanded="false" />
+            <element signature="n#!!block;n#renderYearHint#0;n#FinancialChart#0" expanded="false" />
+            <element signature="n#!!block;n#renderValueHints#0;n#FinancialChart#0" expanded="false" />
+            <marker date="1487098067146" expanded="true" signature="6644:6685" placeholder="..." />
+            <marker date="1487098067146" expanded="true" signature="12565:12644" placeholder="..." />
           </folding>
         </state>
       </provider>
