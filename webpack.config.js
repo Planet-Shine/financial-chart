@@ -23,7 +23,6 @@ module.exports = {
         extensions: ['', '.js']
     },
     module: {
-
         loaders: [{
             test:   /\.jsx?$/,
             loader: "babel"
@@ -34,7 +33,6 @@ module.exports = {
             test:   /\.(png|jpg|svg|ttf|eot|woff|woff2)$/,
             loader: 'file?name=[path][name].[ext]'
         }]
-
     },
 
     devServer: {

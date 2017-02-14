@@ -8,18 +8,22 @@ import timeHintBox from './styles/timeHintBox';
 import yearHintBox from './styles/yearHintBox';
 import valueHintBox from './styles/valueHintBox';
 import axisBox from './styles/axisBox';
-import months from './months'
+import date, { months } from 'utils/date'
 import math from 'utils/math';
 import dom from 'utils/dom';
 
 import './FinancialChart.less';
 
 const COUNT_OF_YAXIS = 5; // 2 minimum.
+const POINTER_CLIP_ID = 'pointer-clip';
 
 class FinancialChart extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            pointerPrice: null
+        };
         this.handleMouseMove = this.handleMouseMove.bind(this);
         this.handleMouseOut = this.handleMouseOut.bind(this);
     }
@@ -33,7 +37,7 @@ class FinancialChart extends Component {
         var nearestPrice = null;
         var minimalDelta = null;
 
-        prices.forEach((price, index) => {
+        prices.forEach((price) => {
             let delta = Math.abs(price[0] - targetTimestamp);
             if (nearestPrice !== null) {
                 if (delta < minimalDelta) {
@@ -50,18 +54,26 @@ class FinancialChart extends Component {
     }
 
     handleMouseMove(e) {
+        const { data : { prices } } = this.props;
         const mousePos = dom.getMousePos(e);
         const nearestPrice = this.getNearestPrice(mousePos);
 
         const culcGraphPoint = this.getCulcGraphPoint();
         const point = culcGraphPoint(nearestPrice);
-
-        this.pointer.setAttribute('transform', `translate(${point.x},${point.y})`);
-        this.pointer.setAttribute('visibility', 'visible');
+        const previousPrice = prices[prices.indexOf(nearestPrice) - 1] || null;
+        this.setState({
+            pointerPrice: {
+                point,
+                price: nearestPrice,
+                previousPrice
+            }
+        });
     }
 
     handleMouseOut() {
-        this.pointer.setAttribute('visibility', 'hidden');
+        this.setState({
+            pointerPrice: null
+        });
     }
 
     getValueHints() {
@@ -82,123 +94,6 @@ class FinancialChart extends Component {
         return result;
     }
 
-    renderTimeHints() {
-        const { left, right, bottom } = timeHintBox;
-        const { width, height } = this.props;
-        const top = parseInt(height - bottom, 10);
-        const leftTo = width - right;
-        const step = (leftTo - left) / months.length;
-        const nodes = months.map((month, index) => {
-                const x = left + (step / 2) + step * index;
-                return (
-                    <text x={x}
-                          style={timeHintStyle}
-                          textAnchor="middle"
-                          y={top}
-                          opacity="1"
-                          key={index}>
-                        <tspan>
-                            {months[index]}
-                        </tspan>
-                    </text>
-                );
-            });
-
-        return (
-            <g className="financial-chart__time-hints">
-                {nodes}
-            </g>
-        );
-    }
-
-    renderYearHint() {
-        const { data } = this.props;
-        const { left, bottom } = yearHintBox;
-        const { height } = this.props;
-        var node = null;
-        var date = data.prices[0][0];
-        if (date) {
-            date = new Date(date);
-            node = (
-                <text x={left}
-                      style={yearHintStyle}
-                      textAnchor="start"
-                      y={height - bottom}
-                      opacity="1">
-                    <tspan>{date.getFullYear()}</tspan>
-                </text>
-            );
-        }
-        return (
-            <g className="financial-chart__year-hint">
-                {node}
-            </g>
-        );
-    }
-
-    renderValueHints() {
-        const { left, top, bottom } = valueHintBox;
-        const { height } = this.props;
-        const topTo = height - bottom;
-        const valueHints = this.getValueHints();
-        const step = (topTo - top) / (valueHints.length - 1); // Отнимаем 1цу, т.к. промежутков у нас на 1 меньше. Начинается и кончается линией.
-        const nodes = valueHints.map((valueHint, index) => {
-                const y = top + step * index;
-                return (
-                    <text key={index}
-                          x={left}
-                          style={valueHintStyle}
-                          textAnchor="end"
-                          y={y}
-                          opacity="1">
-                        <tspan>
-                            {valueHint}
-                        </tspan>
-                    </text>
-                );
-            });
-
-        return (
-            <g className="financial-chart__value-hints">
-                {nodes}
-            </g>
-        );
-    }
-
-    renderYAxises() {
-        const { left, right, bottom, top } = axisBox;
-        const { width, height } = this.props;
-        const valueHints = this.getValueHints();
-        const leftTo = width - right;
-        const topTo  = height - bottom;
-        const stepY  = (topTo - top) / (valueHints.length - 1); // Отнимаем 1цу, т.к. промежутков у нас на 1 меньше. Начинается и кончается линией.
-        const nodes = valueHints.map((valueHint, index) => {
-            const y = top + stepY * index;
-            const point1 = {
-                x: left,
-                y: y
-            };
-            const point2 = {
-                x: leftTo,
-                y: y
-            };
-            return (<path
-                        key={index}
-                        fill="none"
-                        stroke={palette.axis}
-                        strokeWidth="1.5"
-                        opacity="1"
-                        d={`M ${point1.x} ${point1.y} L ${point2.x} ${point2.y}`}
-                />);
-        });
-
-        return (
-            <g className="financial-chart__yaxiss">
-                {nodes}
-            </g>
-        );
-    }
-
     getTimeLimits() {
         var { data, year } = this.props;
         const date = new Date(data.prices[0][0]);
@@ -215,32 +110,10 @@ class FinancialChart extends Component {
         return Math.max.apply(null, prices);
     }
 
-    getNearestMaxLimit(value) {
-        const [ integerValueString, decimalValueString ] = String(value).split('.');
-        var nearstMaximum;
-        function getNextMaxDigit(targetDigit) {
-            // для  0,1,2,3,4,5,6,7,8, 9
-            return [2,2,4,4,6,6,8,8,10,10][targetDigit];
-        }
-        if (integerValueString && integerValueString !== '0') {
-            let digitCount = integerValueString.length;
-            let firstDigit = parseInt(integerValueString[0], 10);
-            let nextMaxDigit = getNextMaxDigit(firstDigit);
-            nearstMaximum = nextMaxDigit * Math.pow(10, digitCount - 1);
-        } else {
-            let significandDecimalValueString = String(parseInt(decimalValueString, 10));
-            let zeroCount = decimalValueString.length - significandDecimalValueString.length;
-            let firstDigit = parseInt(significandDecimalValueString[0], 10);
-            let nextMaxDigit = getNextMaxDigit(firstDigit);
-            nearstMaximum = nextMaxDigit / Math.pow(10, zeroCount);
-        }
-        return nearstMaximum;
-    }
-
     getValueLimits() {
         return {
             min: 0,
-            max: this.getNearestMaxLimit(this.getMaxPrice())
+            max: math.getNearestMaxGraphLimit(this.getMaxPrice())
         };
     }
 
@@ -310,17 +183,21 @@ class FinancialChart extends Component {
     }
 
     renderPricePointer() {
+        var point = null;
+        if (this.state.pointerPrice) {
+            point = this.state.pointerPrice.point;
+        }
         return (
-            <g clipPath="url(#pointer-clip)">
-                <g ref={e => this.pointer = e} transform="translate(0,0)" visibility="visible">
-                <line strokeDasharray="4, 4" fill={palette.pointerLine} x1="1" y1="0" x2="1" y2="500"
+            <g clipPath={`url(#${POINTER_CLIP_ID})`}>
+                <g ref={e => this.pointer = e} transform={point ? `translate(${point.x},${point.y})` : 'translate(0,0)'} visibility={point ? 'visible' : 'hidden'}>
+                <line strokeDasharray="4, 4" fill={palette.pointerLine} x1="0" y1="0" x2="0" y2="10000"
                     stroke={palette.pointerLine}
                     strokeWidth="1" />
                 <circle stroke={palette.background}
                     fill={palette.graph}
                     strokeWidth="2"
-                    cx="1"
-                    cy="1"
+                    cx="0"
+                    cy="0"
                     r="4" />
                 </g>
             </g>
@@ -332,7 +209,7 @@ class FinancialChart extends Component {
         const { top, left, bottom, right } = axisBox;
 
         return (
-            <clipPath id="pointer-clip">
+            <clipPath id={POINTER_CLIP_ID}>
                 <rect x={left}
                       y={top}
                       width={width - left - right}
@@ -340,6 +217,7 @@ class FinancialChart extends Component {
             </clipPath>
         );
     }
+
     renderHitArea() {
         const { width, height } = this.props;
         const { top, left, bottom, right } = axisBox;
@@ -354,6 +232,168 @@ class FinancialChart extends Component {
                   height={height - top - bottom}
                   fill="transparent" />
         );
+    }
+
+    renderTimeHints() {
+        const { left, right, bottom } = timeHintBox;
+        const { width, height } = this.props;
+        const top = parseInt(height - bottom, 10);
+        const leftTo = width - right;
+        const step = (leftTo - left) / months.length;
+        const nodes = months.map((month, index) => {
+            const x = left + (step / 2) + step * index;
+            return (
+                <text x={x}
+                      style={timeHintStyle}
+                      textAnchor="middle"
+                      y={top}
+                      opacity="1"
+                      key={index}>
+                    <tspan>
+                        {months[index]}
+                    </tspan>
+                </text>
+            );
+        });
+
+        return (
+            <g className="financial-chart__time-hints">
+                {nodes}
+            </g>
+        );
+    }
+
+    renderYearHint() {
+        const { data } = this.props;
+        const { left, bottom } = yearHintBox;
+        const { height } = this.props;
+        var node = null;
+        var date = data.prices[0][0];
+        if (date) {
+            date = new Date(date);
+            node = (
+                <text x={left}
+                      style={yearHintStyle}
+                      textAnchor="start"
+                      y={height - bottom}
+                      opacity="1">
+                    <tspan>{date.getFullYear()}</tspan>
+                </text>
+            );
+        }
+        return (
+            <g className="financial-chart__year-hint">
+                {node}
+            </g>
+        );
+    }
+
+    renderValueHints() {
+        const { left, top, bottom } = valueHintBox;
+        const { height } = this.props;
+        const topTo = height - bottom;
+        const valueHints = this.getValueHints();
+        const step = (topTo - top) / (valueHints.length - 1); // Отнимаем 1цу, т.к. промежутков у нас на 1 меньше. Начинается и кончается линией.
+        const nodes = valueHints.map((valueHint, index) => {
+            const y = top + step * index;
+            return (
+                <text key={index}
+                      x={left}
+                      style={valueHintStyle}
+                      textAnchor="end"
+                      y={y}
+                      opacity="1">
+                    <tspan>
+                        {valueHint}
+                    </tspan>
+                </text>
+            );
+        });
+
+        return (
+            <g className="financial-chart__value-hints">
+                {nodes}
+            </g>
+        );
+    }
+
+    renderYAxises() {
+        const { left, right, bottom, top } = axisBox;
+        const { width, height } = this.props;
+        const valueHints = this.getValueHints();
+        const leftTo = width - right;
+        const topTo  = height - bottom;
+        const stepY  = (topTo - top) / (valueHints.length - 1); // Отнимаем 1цу, т.к. промежутков у нас на 1 меньше. Начинается и кончается линией.
+        const nodes = valueHints.map((valueHint, index) => {
+            const y = top + stepY * index;
+            const point1 = {
+                x: left,
+                y: y
+            };
+            const point2 = {
+                x: leftTo,
+                y: y
+            };
+            return (<path
+                key={index}
+                fill="none"
+                stroke={palette.axis}
+                strokeWidth="1.5"
+                opacity="1"
+                d={`M ${point1.x} ${point1.y} L ${point2.x} ${point2.y}`}
+            />);
+        });
+
+        return (
+            <g className="financial-chart__yaxiss">
+                {nodes}
+            </g>
+        );
+    }
+
+    renderPriceTicket() {
+        const pointerPrice = this.state.pointerPrice;
+        if (pointerPrice) {
+            let currency = this.props.data.baseCurrency;
+            let priceDelta;
+            let point = this.state.pointerPrice.point;
+            if (pointerPrice.previousPrice) {
+                priceDelta = pointerPrice.price[1] - pointerPrice.previousPrice[1];
+                priceDelta = priceDelta.toFixed(2);
+            }
+            return (
+                <g className="financial-chart__price-hint"
+                   transform={`translate(${point.x}, ${point.y})`}>
+                    <text y={5}
+                          textAnchor="middle"
+                          opacity="1">
+                        <tspan>
+                            {pointerPrice.price[1]} {currency}
+                        </tspan>
+                    </text>
+                    <text y={25}
+                          textAnchor="middle"
+                          opacity="1">
+                        <tspan>
+                            {date.toRussianString(new Date(pointerPrice.price[0]))}
+                        </tspan>
+                    </text>
+                    <text y={45}
+                          textAnchor="middle"
+                          opacity="1">
+                        <tspan>
+                            {priceDelta}
+                        </tspan>
+                    </text>
+                </g>
+            );
+        }
+        return (
+            <g className="financial-chart__price-hint"
+               transform={`translate(150, 150)`}
+               visibility="hidden">
+            </g>
+        )
     }
 
     render() {
@@ -379,6 +419,7 @@ class FinancialChart extends Component {
                     {this.renderYearHint()}
                     {this.renderGraph()}
                     {this.renderPricePointer()}
+                    {this.renderPriceTicket()}
                     {this.renderHitArea()}
                 </svg>
             </div>
