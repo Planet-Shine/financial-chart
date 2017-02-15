@@ -1,4 +1,4 @@
-import palette from './palette';
+import palette from 'components/FinancialChart/styles/palette';
 
 const base = {
     color: palette.hint,

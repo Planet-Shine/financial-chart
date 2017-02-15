@@ -14,7 +14,7 @@ const months = [
     'Декабрь'
 ];
 
-var date = {
+var $date = {
     toRussianString(date) {
         var month = months[date.getMonth()].toLowerCase();
         return `${date.getDate()} ${month} ${date.getFullYear()}`;
@@ -23,4 +23,4 @@ var date = {
 
 export { months };
 
-export default date;
+export default $date;

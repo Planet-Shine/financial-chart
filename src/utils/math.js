@@ -1,5 +1,5 @@
 
-const math = {
+const $math = {
     partOfRange(min, max, value) {
         return (value - min) / (max - min);
     },
@@ -27,4 +27,4 @@ const math = {
 
 };
 
-export default math;
+export default $math;

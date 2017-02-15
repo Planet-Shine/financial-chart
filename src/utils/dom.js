@@ -1,5 +1,5 @@
 
-const dom = {
+const $dom = {
     getCoords(element) {
         var box = element.getBoundingClientRect();
 
@@ -22,7 +22,7 @@ const dom = {
     },
     getMousePos(element, pageMousePosition) {
         if (arguments.length === 2) {
-            let elementCoords = dom.getCoords(element);
+            let elementCoords = $dom.getCoords(element);
             let resultPoint = {
                 x: pageMousePosition.x - elementCoords.x,
                 y: pageMousePosition.y - elementCoords.y
@@ -30,11 +30,11 @@ const dom = {
             return resultPoint;
         }
         let event = element;
-        return dom.getMousePos(event.currentTarget, {
+        return $dom.getMousePos(event.currentTarget, {
             x: event.pageX,
             y: event.pageY
         });
     }
 };
 
-export default dom;
+export default $dom;

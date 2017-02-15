@@ -1,10 +1,12 @@
-
 import React, { Component } from 'react';
-import './PriceTicket.less';
-import date from 'utils/date';
-import classNames from 'classnames';
 import { PriceText } from 'components';
+
+import './PriceTicket.less';
+import { graphArea as graphAreaBox } from 'components/FinancialChartGraph/styles/boxes';
+
 import $float from 'utils/float';
+import $date from 'utils/date';
+import classNames from 'classnames';
 
 class PriceTicket extends Component {
 
@@ -22,12 +24,12 @@ class PriceTicket extends Component {
             return (
                 <div className="price-ticket"
                      style={{
-                        left: point.x,
-                        top: point.y
+                        left: point.x + graphAreaBox.left, // Корректируем в соответсвии с областью графика.
+                        top: point.y + graphAreaBox.top
                      }}>
                     <div className="price-ticket__sub">
                         <div className="price-ticket__date">
-                            {date.toRussianString(new Date(pointerPrice.price[0]))}
+                            {$date.toRussianString(new Date(pointerPrice.price[0]))}
                         </div>
                         <div>
                             <PriceText className="price-ticket__price"
