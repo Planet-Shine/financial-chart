@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { PriceTicket, FinancialChartGraph } from 'components';
 
-import rootStyles from './styles/root';
-import palette from './styles/palette';
-import { graphArea as graphAreaBox } from 'components/FinancialChartGraph/styles/boxes';
+import * as $props from './props';
+import * as $boxes from 'components/FinancialChart/props/boxes';
 import './FinancialChart.less';
 
 const POINTER_CLIP_ID = 'pointer-clip';
@@ -26,16 +25,9 @@ class FinancialChart extends Component {
         }
         return (
             <g clipPath={`url(#${POINTER_CLIP_ID})`}>
-                <g ref={e => this.pointer = e} transform={point ? `translate(${point.x},${point.y})` : 'translate(0,0)'} visibility={point ? 'visible' : 'hidden'}>
-                <line strokeDasharray="4, 4" fill={palette.pointerLine} x1="0" y1="0" x2="0" y2="10000"
-                    stroke={palette.pointerLine}
-                    strokeWidth="1" />
-                <circle stroke={palette.background}
-                    fill={palette.graph}
-                    strokeWidth="2"
-                    cx="0"
-                    cy="0"
-                    r="4" />
+                <g transform={point ? `translate(${point.x},${point.y})` : 'translate(0,0)'} visibility={point ? 'visible' : 'hidden'}>
+                <line {...$props.pricePointer.line} />
+                <circle {...$props.pricePointer.aim} />
                 </g>
             </g>
         );
@@ -43,13 +35,12 @@ class FinancialChart extends Component {
 
     renderPointerClip() {
         const { width, height } = this.props;
-        const { top, left, bottom, right } = graphAreaBox;
-
+        const { top, left, bottom, right } = $boxes.graphArea;
         return (
             <clipPath id={POINTER_CLIP_ID}>
-                <rect x={0}
-                      y={0}
-                      width={width - left - right}
+                <rect x={$props.pointerClip.x}
+                      y={$props.pointerClip.y}
+                      width={width - left - right + $props.pointerClip.additionalWidth}
                       height={height - top - bottom} />
             </clipPath>
         );
@@ -77,11 +68,10 @@ class FinancialChart extends Component {
                     height
                 }}>
                 <svg version="1.1"
-                     style={rootStyles}
                      xmlns="http://www.w3.org/2000/svg"
                      width={width}
                      viewBox={`0 0 ${width} ${height}`}
-                     height={height}>
+                     height={height} {...$props.root}>
                     <desc>Financial chart</desc>
                     <defs>
                         {this.renderPointerClip()}

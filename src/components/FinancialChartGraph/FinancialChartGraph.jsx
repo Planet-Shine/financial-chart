@@ -1,9 +1,8 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import palette from 'components/FinancialChart/styles/palette';
-import { timeHint as timeHintStyle, valueHint as valueHintStyle, yearHint as yearHintStyle } from './styles/hints';
-import {timeHint as timeHintBox, yearHint as yearHintBox, valueHint as valueHintBox, graphArea as graphAreaBox} from './styles/boxes';
+import * as $props from 'components/FinancialChart/props';
+import * as $boxes from 'components/FinancialChart/props/boxes';
 
 import { months } from 'utils/date'
 import $math from 'utils/math';
@@ -109,7 +108,7 @@ class FinancialChartGraph extends Component {
 
     getGraphAreaSize() {
         const { width, height } = this.props;
-        const { left, right, bottom, top } = graphAreaBox;
+        const { left, right, bottom, top } = $boxes.graphArea;
         return {
             width: width - right - left,
             height: height - bottom - top
@@ -132,19 +131,13 @@ class FinancialChartGraph extends Component {
 
         return (
             <g className="financial-chart__graph">
-                <path
-                    fill="none"
-                    d={d}
-                    stroke={palette.graph}
-                    strokeWidth="1.5"
-                    strokeLinejoin="round"
-                    strokeLinecap="round" />
+                <path d={d} {...$props.graph} />
             </g>
         );
     }
 
     renderTimeHints() {
-        const { left, right, bottom } = timeHintBox;
+        const { left, right, bottom } = $boxes.timeHint;
         const { width, height } = this.props;
         const top = parseInt(height - bottom, 10);
         const leftTo = width - right;
@@ -152,11 +145,10 @@ class FinancialChartGraph extends Component {
         const nodes = months.map((month, index) => {
             const x = left + (step / 2) + step * index; // Добавляем половину шага, т.к. надпись должна быть в центре своего диапазона.
             return (
-                <text x={x}
-                      style={timeHintStyle}
-                      textAnchor="middle"
+                <text key={index}
+                      x={x}
                       y={top}
-                      key={index}>
+                      {...$props.timeHint}>
                     <tspan>
                         {months[index]}
                     </tspan>
@@ -173,7 +165,7 @@ class FinancialChartGraph extends Component {
 
     renderYearHint() {
         const { data } = this.props;
-        const { left, bottom } = yearHintBox;
+        const { left, bottom } = $boxes.yearHint;
         const { height } = this.props;
         var node = null;
         // По первой дате определяем год.
@@ -182,9 +174,8 @@ class FinancialChartGraph extends Component {
             date = new Date(date);
             node = (
                 <text x={left}
-                      style={yearHintStyle}
-                      textAnchor="start"
-                      y={height - bottom}>
+                      y={height - bottom}
+                    {...$props.yearHint}>
                     <tspan>{date.getFullYear()}</tspan>
                 </text>
             );
@@ -197,7 +188,7 @@ class FinancialChartGraph extends Component {
     }
 
     renderValueHints() {
-        const { left, top, bottom } = valueHintBox;
+        const { left, top, bottom } = $boxes.valueHint;
         const { height } = this.props;
         const topTo = height - bottom;
         const valueHints = this.getValueHints();
@@ -207,9 +198,8 @@ class FinancialChartGraph extends Component {
             return (
                 <text key={index}
                       x={left}
-                      style={valueHintStyle}
-                      textAnchor="end"
-                      y={y}>
+                      y={y}
+                      {...$props.valueHint}>
                     <tspan>
                         {valueHint}
                     </tspan>
@@ -225,7 +215,7 @@ class FinancialChartGraph extends Component {
     }
 
     renderYAxises() {
-        const { left, right, bottom, top } = graphAreaBox;
+        const { left, right, bottom, top } = $boxes.graphArea;
         const { width, height } = this.props;
         const valueHints = this.getValueHints();
         const leftTo = width - right;
@@ -243,10 +233,8 @@ class FinancialChartGraph extends Component {
             };
             return (<path
                 key={index}
-                fill="none"
-                stroke={palette.axis}
-                strokeWidth="1.5"
                 d={`M ${point1.x} ${point1.y} L ${point2.x} ${point2.y}`}
+                {...$props.axis}
             />);
         });
 
@@ -263,11 +251,11 @@ class FinancialChartGraph extends Component {
             <rect onMouseMove={this.handleMouseMove}
                   onMouseOut={this.handleMouseOut}
                   className="financial-chart__hit-area"
-                  x={0}
-                  y={0}
+                  x="0"
+                  y="0"
                   width={width}
                   height={height}
-                  fill="transparent" />
+                  {...$props.hitArea} />
         );
     }
 
@@ -297,12 +285,12 @@ class FinancialChartGraph extends Component {
 
         return (
             <g>
-                <rect x="0" y="0" width={width} height={height} fill={palette.background} />
+                <rect x="0" y="0" width={width} height={height} {...$props.backgroundBox} />
                 {this.renderYAxises()}
                 {this.renderValueHints()}
                 {this.renderTimeHints()}
                 {this.renderYearHint()}
-                <g transform={`translate(${graphAreaBox.left}, ${graphAreaBox.top})`}>
+                <g transform={`translate(${$boxes.graphArea.left}, ${$boxes.graphArea.top})`}>
                     {this.renderGraph()}
                     {this.props.children}
                     {this.renderHitArea()}

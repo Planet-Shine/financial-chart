@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PriceText } from 'components';
 
 import './PriceTicket.less';
-import { graphArea as graphAreaBox } from 'components/FinancialChartGraph/styles/boxes';
+import * as $boxes from 'components/FinancialChart/props/boxes';
 
 import $float from 'utils/float';
 import $date from 'utils/date';
@@ -21,12 +21,12 @@ class PriceTicket extends Component {
                 priceDelta = pointerPrice.price[1] - pointerPrice.previousPrice[1];
                 priceDeltaString = $float.toString(Math.abs(priceDelta.toFixed(2) || 0));
             }
-            let isLeftSideTicket = point.x > (chartSize.width - graphAreaBox.left - graphAreaBox.right) - graphAreaBox.switchHintSideRightLimit;
+            let isLeftSideTicket = point.x > (chartSize.width - $boxes.graphArea.left - $boxes.graphArea.right) - $boxes.graphArea.switchHintSideRightLimit;
             return (
                 <div className={classNames("price-ticket", isLeftSideTicket && "price-ticket_left-side")}
                      style={{
-                        left: point.x + graphAreaBox.left, // Корректируем в соответсвии с областью графика.
-                        top: point.y + graphAreaBox.top
+                        left: point.x + $boxes.graphArea.left, // Корректируем в соответсвии с областью графика.
+                        top: point.y + $boxes.graphArea.top
                      }}>
                     <div className="price-ticket__sub">
                         <div className="price-ticket__date">
