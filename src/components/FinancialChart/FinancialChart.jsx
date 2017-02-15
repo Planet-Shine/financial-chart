@@ -26,8 +26,8 @@ class FinancialChart extends Component {
         return (
             <g clipPath={`url(#${POINTER_CLIP_ID})`}>
                 <g transform={point ? `translate(${point.x},${point.y})` : 'translate(0,0)'} visibility={point ? 'visible' : 'hidden'}>
-                <line {...$props.pricePointer.line} />
-                <circle {...$props.pricePointer.aim} />
+                    <line {...$props.pricePointer.line} />
+                    <circle {...$props.pricePointer.aim} />
                 </g>
             </g>
         );
@@ -46,6 +46,26 @@ class FinancialChart extends Component {
         );
     }
 
+    renderPriceTicket() {
+        const { width } = this.props;
+        var pointerPrice = null;
+        var isLeftSideTicket = false;
+        if (this.state.pointerPrice) {
+            pointerPrice = Object.assign({}, this.state.pointerPrice);
+            let point = Object.assign({}, this.state.pointerPrice.point);
+            point.x += $boxes.graphArea.left;
+            point.y += $boxes.graphArea.top;
+            pointerPrice.point = point;
+            isLeftSideTicket = (point.x > (width - $boxes.graphArea.left - $boxes.graphArea.right) - $boxes.graphArea.switchHintSideRightLimit);
+        }
+        return (
+            <PriceTicket
+                isLeftSideTicket={isLeftSideTicket}
+                evaluateCurrency={this.props.data.evaluateCurrency}
+                pointerPrice={pointerPrice} />
+        );
+    }
+
     handleNewPointerPrice(newPointerPrice) {
         this.setState({
             pointerPrice: newPointerPrice
@@ -60,7 +80,6 @@ class FinancialChart extends Component {
 
     render() {
         const { width, height, data } = this.props;
-
         return (
             <div className="financial-chart" 
                 style={{
@@ -85,13 +104,7 @@ class FinancialChart extends Component {
                         {this.renderPricePointer()}
                     </FinancialChartGraph>
                 </svg>
-                <PriceTicket
-                    chartSize={{
-                        width: width,
-                        height: height
-                    }}
-                    evaluateCurrency={this.props.data.evaluateCurrency}
-                    pointerPrice={this.state.pointerPrice} />
+                {this.renderPriceTicket()}
             </div>
         );
     }
