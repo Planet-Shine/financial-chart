@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { PriceText } from 'components';
+import React, { Component, PropTypes } from 'react';
+import { PriceText } from 'containers';
 
 import './PriceTicket.less';
 
@@ -8,6 +8,12 @@ import $date from 'utils/date';
 import classNames from 'classnames';
 
 class PriceTicket extends Component {
+
+    static propTypes = {
+        pointerPrice: PropTypes.object,
+        isLeftSideTicket: PropTypes.bool,
+        evaluateCurrency: PropTypes.string
+    };
 
     render () {
         const { pointerPrice, evaluateCurrency, isLeftSideTicket } = this.props;

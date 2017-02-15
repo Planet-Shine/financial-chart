@@ -1,13 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-import { PriceTicket, FinancialChartGraph } from 'components';
+import { PriceTicket, FinancialChartGraph } from 'containers';
 
 import * as $props from './props';
-import * as $boxes from 'components/FinancialChart/props/boxes';
+import * as $boxes from 'containers/FinancialChart/props/boxes';
 import './FinancialChart.less';
 
 const POINTER_CLIP_ID = 'pointer-clip';
 
 class FinancialChart extends Component {
+
+    static propTypes = {
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+        data: PropTypes.object.isRequired
+    };
 
     constructor(props) {
         super(props);

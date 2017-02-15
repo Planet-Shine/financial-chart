@@ -1,8 +1,8 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import * as $props from 'components/FinancialChart/props';
-import * as $boxes from 'components/FinancialChart/props/boxes';
+import * as $props from 'containers/FinancialChart/props';
+import * as $boxes from 'containers/FinancialChart/props/boxes';
 
 import { months } from 'utils/date'
 import $math from 'utils/math';
@@ -13,6 +13,12 @@ const YAXIS_COUNT = 5; // 2 minimum.
 const MINIMUM_VALUE = 0;
 
 class FinancialChartGraph extends Component {
+
+    static propTypes = {
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+        data: PropTypes.object.isRequired
+    };
 
     constructor(props) {
         super(props);

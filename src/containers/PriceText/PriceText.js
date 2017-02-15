@@ -1,6 +1,6 @@
 
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import $float from 'utils/float';
 
 const BEFORE_PRICES = {
@@ -12,6 +12,12 @@ const AFTER_PRICES = {
 };
 
 class PriceText extends Component {
+
+    static propTypes = {
+        currency: PropTypes.string,
+        price: PropTypes.number.isRequired,
+        className: PropTypes.string
+    };
 
     render() {
         var { currency, price, className } = this.props;

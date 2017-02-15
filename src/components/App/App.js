@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FinancialChart } from 'components';
+import { FinancialChart } from 'containers';
 import './App.less';
 import exchangeRates from 'data/exchangeRates';
 
