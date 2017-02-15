@@ -11,9 +11,9 @@ import classNames from 'classnames';
 class PriceTicket extends Component {
 
     render () {
-        const pointerPrice = this.props.pointerPrice;
+        const { pointerPrice, chartSize, evaluateCurrency } = this.props;
+
         if (pointerPrice) {
-            let currency = this.props.baseCurrency;
             let priceDelta;
             let priceDeltaString;
             let point = this.props.pointerPrice.point;
@@ -21,8 +21,9 @@ class PriceTicket extends Component {
                 priceDelta = pointerPrice.price[1] - pointerPrice.previousPrice[1];
                 priceDeltaString = $float.toString(Math.abs(priceDelta.toFixed(2) || 0));
             }
+            let isLeftSideTicket = point.x > (chartSize.width - graphAreaBox.left - graphAreaBox.right) - graphAreaBox.switchHintSideRightLimit;
             return (
-                <div className="price-ticket"
+                <div className={classNames("price-ticket", isLeftSideTicket && "price-ticket_left-side")}
                      style={{
                         left: point.x + graphAreaBox.left, // Корректируем в соответсвии с областью графика.
                         top: point.y + graphAreaBox.top
@@ -34,7 +35,7 @@ class PriceTicket extends Component {
                         <div>
                             <PriceText className="price-ticket__price"
                                        price={pointerPrice.price[1].toFixed(2)}
-                                       currency={currency} />
+                                       currency={evaluateCurrency} />
                             <span className={classNames({
                                     'price-ticket__delta': true,
                                     'price-ticket__delta_positive': priceDelta > 0,

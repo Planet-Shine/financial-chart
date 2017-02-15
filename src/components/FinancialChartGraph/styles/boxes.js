@@ -9,7 +9,8 @@ const graphArea = {
     top: 25,
     left: 35,
     bottom: 56,
-    right: 21
+    right: 21,
+    switchHintSideRightLimit: 135
 };
 
 const valueHint = {

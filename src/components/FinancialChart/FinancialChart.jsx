@@ -95,7 +95,13 @@ class FinancialChart extends Component {
                         {this.renderPricePointer()}
                     </FinancialChartGraph>
                 </svg>
-                <PriceTicket baseCurrency={this.props.data.baseprice} pointerPrice={this.state.pointerPrice} />
+                <PriceTicket
+                    chartSize={{
+                        width: width,
+                        height: height
+                    }}
+                    evaluateCurrency={this.props.data.evaluateCurrency}
+                    pointerPrice={this.state.pointerPrice} />
             </div>
         );
     }
