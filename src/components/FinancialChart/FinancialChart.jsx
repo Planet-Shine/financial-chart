@@ -48,15 +48,16 @@ class FinancialChart extends Component {
 
     renderPriceTicket() {
         const { width } = this.props;
+        const { graphArea } = $boxes;
         var pointerPrice = null;
         var isLeftSideTicket = false;
         if (this.state.pointerPrice) {
             pointerPrice = Object.assign({}, this.state.pointerPrice);
             let point = Object.assign({}, this.state.pointerPrice.point);
-            point.x += $boxes.graphArea.left;
-            point.y += $boxes.graphArea.top;
+            point.x += graphArea.left;
+            point.y += graphArea.top;
             pointerPrice.point = point;
-            isLeftSideTicket = (point.x > (width - $boxes.graphArea.left - $boxes.graphArea.right) - $boxes.graphArea.switchHintSideRightLimit);
+            isLeftSideTicket = (point.x > (width - graphArea.left - graphArea.right) - graphArea.switchHintSideRightLimit);
         }
         return (
             <PriceTicket
