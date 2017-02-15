@@ -14,9 +14,25 @@ const months = [
     'Декабрь'
 ];
 
+
+const genitiveCaseMonths = [
+    'Января',
+    'Февраля',
+    'Марта',
+    'Апреля',
+    'Мая',
+    'Июня',
+    'Июля',
+    'Августа',
+    'Сентября',
+    'Октября',
+    'Ноября',
+    'Декабря'
+];
+
 var $date = {
     toRussianString(date) {
-        var month = months[date.getMonth()].toLowerCase();
+        var month = genitiveCaseMonths[date.getMonth()].toLowerCase();
         return `${date.getDate()} ${month} ${date.getFullYear()}`;
     }
 };
