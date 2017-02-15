@@ -11,6 +11,7 @@ import axisBox from './styles/axisBox';
 import date, { months } from 'utils/date'
 import math from 'utils/math';
 import dom from 'utils/dom';
+import { PriceTicket } from 'components';
 
 import './FinancialChart.less';
 
@@ -352,57 +353,19 @@ class FinancialChart extends Component {
     }
 
     renderPriceTicket() {
-        const pointerPrice = this.state.pointerPrice;
-        if (pointerPrice) {
-            let currency = this.props.data.baseCurrency;
-            let priceDelta;
-            let point = this.state.pointerPrice.point;
-            if (pointerPrice.previousPrice) {
-                priceDelta = pointerPrice.price[1] - pointerPrice.previousPrice[1];
-                priceDelta = priceDelta.toFixed(2);
-            }
-            return (
-                <g className="financial-chart__price-hint"
-                   transform={`translate(${point.x}, ${point.y})`}>
-                    <text y={5}
-                          textAnchor="middle"
-                          opacity="1">
-                        <tspan>
-                            {pointerPrice.price[1]} {currency}
-                        </tspan>
-                    </text>
-                    <text y={25}
-                          textAnchor="middle"
-                          opacity="1">
-                        <tspan>
-                            {date.toRussianString(new Date(pointerPrice.price[0]))}
-                        </tspan>
-                    </text>
-                    <text y={45}
-                          textAnchor="middle"
-                          opacity="1">
-                        <tspan>
-                            {priceDelta}
-                        </tspan>
-                    </text>
-                </g>
-            );
-        }
-        return (
-            <g className="financial-chart__price-hint"
-               transform={`translate(150, 150)`}
-               visibility="hidden">
-            </g>
-        )
+        
     }
 
     render() {
         const { width, height } = this.props;
 
-        // todo: втавить на фон {palette.background}
         return (
-            <div>
-                <svg version="1.1" className="financial-chart"
+            <div className="financial-chart" 
+                style={{
+                    width,
+                    height
+                }}>
+                <svg version="1.1"
                      style={rootStyles}
                      xmlns="http://www.w3.org/2000/svg"
                      width={width}
@@ -412,16 +375,16 @@ class FinancialChart extends Component {
                     <defs>
                         {this.renderPointerClip()}
                     </defs>
-                    <rect x="0" y="0" width={width} height={height} fill="transparent" />
+                    <rect x="0" y="0" width={width} height={height} fill={palette.background} />
                     {this.renderYAxises()}
                     {this.renderValueHints()}
                     {this.renderTimeHints()}
                     {this.renderYearHint()}
                     {this.renderGraph()}
                     {this.renderPricePointer()}
-                    {this.renderPriceTicket()}
                     {this.renderHitArea()}
                 </svg>
+                <PriceTicket baseCurrency={this.props.data.baseprice} pointerPrice={this.state.pointerPrice} />
             </div>
         );
     }

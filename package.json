@@ -6,9 +6,10 @@
     "build": "webpack"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "less": "^2.6.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "less": "^2.6.0"
+    "react-dom": "^15.4.2"
   },
   "devDependencies": {
     "autoprefixer-loader": "*",
