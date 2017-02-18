@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { PriceText } from 'containers';
+import { PriceText } from 'components';
 
 import './PriceTicket.less';
 

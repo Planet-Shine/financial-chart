@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { PriceTicket, FinancialChartGraph } from 'containers';
+import { PriceTicket, FinancialChartGraph } from 'components';
 
 import * as $props from './props';
-import * as $boxes from 'containers/FinancialChart/props/boxes';
+import * as $boxes from 'components/FinancialChart/props/boxes';
 import './FinancialChart.less';
 
 const POINTER_CLIP_ID = 'pointer-clip';

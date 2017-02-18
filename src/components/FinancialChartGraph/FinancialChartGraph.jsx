@@ -1,8 +1,8 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import * as $props from 'containers/FinancialChart/props';
-import * as $boxes from 'containers/FinancialChart/props/boxes';
+import * as $props from 'components/FinancialChart/props';
+import * as $boxes from 'components/FinancialChart/props/boxes';
 
 import { months } from 'utils/date'
 import $math from 'utils/math';
