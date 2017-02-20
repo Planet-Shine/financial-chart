@@ -15,7 +15,7 @@ class PriceText extends Component {
 
     static propTypes = {
         currency: PropTypes.string,
-        price: PropTypes.number.isRequired,
+        price: PropTypes.string,
         className: PropTypes.string
     };
 
