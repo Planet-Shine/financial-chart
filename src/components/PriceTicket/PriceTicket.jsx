@@ -11,12 +11,16 @@ class PriceTicket extends Component {
 
     static propTypes = {
         pointerPrice: PropTypes.object,
-        isLeftSideTicket: PropTypes.bool,
+        positionSide: PropTypes.string,
         evaluateCurrency: PropTypes.string
     };
 
     render () {
-        const { pointerPrice, evaluateCurrency, isLeftSideTicket } = this.props;
+        const {
+            pointerPrice,
+            evaluateCurrency,
+            positionSide
+        } = this.props;
 
         if (pointerPrice) {
             let priceDelta;
@@ -27,7 +31,7 @@ class PriceTicket extends Component {
                 priceDeltaString = $float.toString(Math.abs(priceDelta.toFixed(2) || 0));
             }
             return (
-                <div className={classNames("price-ticket", isLeftSideTicket && "price-ticket_left-side")}
+                <div className={classNames("price-ticket", positionSide === 'left' && "price-ticket_left-side")}
                      style={{
                         left: point.x,
                         top: point.y

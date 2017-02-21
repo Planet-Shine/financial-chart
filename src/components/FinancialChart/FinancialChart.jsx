@@ -12,23 +12,14 @@ class FinancialChart extends Component {
     static propTypes = {
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
-        data: PropTypes.object.isRequired
+        data: PropTypes.object.isRequired,
+        onClearPointerPrice: PropTypes.func,
+        onNewPointerPrice: PropTypes.func
     };
 
-    constructor(props) {
-        super(props);
-        this.handleNewPointerPrice = this.handleNewPointerPrice.bind(this);
-        this.handleClearPointerPrice = this.handleClearPointerPrice.bind(this);
-        this.state = {
-            pointerPrice: null
-        };
-    }
-
     renderPricePointer() {
-        var point = null;
-        if (this.state.pointerPrice) {
-            point = this.state.pointerPrice.point;
-        }
+        const { pointerPrice }  = this.props;
+        const { point } = pointerPrice || {};
         return (
             <g clipPath={`url(#${POINTER_CLIP_ID})`}>
                 <g transform={point ? `translate(${point.x},${point.y})` : 'translate(0,0)'} visibility={point ? 'visible' : 'hidden'}>
@@ -53,40 +44,33 @@ class FinancialChart extends Component {
     }
 
     renderPriceTicket() {
-        const { width } = this.props;
-        const { graphArea } = $boxes;
-        var pointerPrice = null;
-        var isLeftSideTicket = false;
-        if (this.state.pointerPrice) {
-            pointerPrice = Object.assign({}, this.state.pointerPrice);
-            let point = Object.assign({}, this.state.pointerPrice.point);
-            point.x += graphArea.left;
-            point.y += graphArea.top;
-            pointerPrice.point = point;
-            isLeftSideTicket = (point.x > (width - graphArea.left - graphArea.right) - graphArea.switchHintSideRightLimit);
-        }
+        const { width, pointerPrice } = this.props;
+        const { point } = pointerPrice || {};
+        const { graphArea : {left, right, top, switchHintSideRightLimit} } = $boxes;
+        const positionSide =
+                point && (point.x > (width - left - right) - switchHintSideRightLimit)
+                ? 'left' : 'right';
         return (
-            <PriceTicket
-                isLeftSideTicket={isLeftSideTicket}
-                evaluateCurrency={this.props.data.evaluateCurrency}
-                pointerPrice={pointerPrice} />
+            <div className="financial-chart__ticket-box" style={{
+                top: top,
+                left: left
+            }}>
+                <PriceTicket
+                    positionSide={positionSide}
+                    evaluateCurrency={this.props.data.evaluateCurrency}
+                    pointerPrice={pointerPrice} />
+            </div>
         );
     }
 
-    handleNewPointerPrice(newPointerPrice) {
-        this.setState({
-            pointerPrice: newPointerPrice
-        });
-    }
-
-    handleClearPointerPrice() {
-        this.setState({
-            pointerPrice: null
-        });
-    }
-
     render() {
-        const { width, height, data } = this.props;
+        const {
+            width,
+            height,
+            data,
+            onClearPointerPrice,
+            onNewPointerPrice
+        } = this.props;
         return (
             <div className="financial-chart" 
                 style={{
@@ -103,8 +87,8 @@ class FinancialChart extends Component {
                         {this.renderPointerClip()}
                     </defs>
                     <FinancialChartGraph
-                        onClearPointerPrice={this.handleClearPointerPrice}
-                        onNewPointerPrice={this.handleNewPointerPrice}
+                        onClearPointerPrice={onClearPointerPrice}
+                        onNewPointerPrice={onNewPointerPrice}
                         width={width}
                         height={height}
                         data={data}>
