@@ -30,8 +30,9 @@ class App extends Component {
   }
 
   render() {
-    var { pointerPrice } = this.state,
-        chartExchangeRates = Object.assign({}, exchangeRates, {prices: this.getPricesOfYear(2015)});
+    const { pointerPrice } = this.state;
+    const chartExchangeRates = Object.assign({}, exchangeRates, {prices: this.getPricesOfYear(2015)});
+    const { prices, baseCurrency, evaluateCurrency } =  chartExchangeRates;
 
     return (
         <div className="app">
@@ -41,7 +42,9 @@ class App extends Component {
                             pointerPrice={pointerPrice}
                             height={280}
                             width={864}
-                            data={chartExchangeRates} />
+                            prices={prices}
+                            baseCurrency={baseCurrency}
+                            evaluateCurrency ={evaluateCurrency} />
           </div>
           <div className="app__layout">
           </div>

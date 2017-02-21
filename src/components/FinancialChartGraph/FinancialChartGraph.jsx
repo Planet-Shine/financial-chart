@@ -5,73 +5,23 @@ import * as $props from 'components/FinancialChart/props';
 import * as $boxes from 'components/FinancialChart/props/boxes';
 
 import { months } from 'utils/date'
-import $math from 'utils/math';
-import $dom from 'utils/dom';
+
 import $collection from 'utils/collection';
 
 const YAXIS_COUNT = 5; // 2 minimum.
-const MINIMUM_VALUE = 0;
 
 class FinancialChartGraph extends Component {
 
     static propTypes = {
+        year: PropTypes.number,
         width: PropTypes.number.isRequired,
         height: PropTypes.number.isRequired,
-        data: PropTypes.object.isRequired
+        points: PropTypes.array,
+        valueLimits: PropTypes.object
     };
 
-    constructor(props) {
-        super(props);
-        this.handleMouseMove = this.handleMouseMove.bind(this);
-        this.handleMouseOut = this.handleMouseOut.bind(this);
-    }
-
-    getNearestPrice(mousePos) {
-        const { data : { prices } } = this.props;
-        const timeLimits = this.getTimeLimits();
-        const areaSize = this.getGraphAreaSize();
-        const xPart = $math.partOfRange(0, areaSize.width,  mousePos.x);
-        const targetTimestamp = timeLimits.min + parseInt((timeLimits.max - timeLimits.min) * xPart, 10);
-        var nearestPrice = null;
-        var minimalDelta = null;
-
-        prices.forEach((price) => {
-            let delta = Math.abs(price[0] - targetTimestamp);
-            if (nearestPrice !== null) {
-                if (delta < minimalDelta) {
-                    minimalDelta = delta;
-                    nearestPrice = price;
-                }
-            } else { // nearestPrice === null
-                nearestPrice = price;
-                minimalDelta = delta;
-            }
-        });
-
-        return nearestPrice;
-    }
-
-    handleMouseMove(e) {
-        const { data : { prices } } = this.props;
-        const mousePos = $dom.getMousePos(e);
-        const nearestPrice = this.getNearestPrice(mousePos);
-
-        const culcGraphPoint = this.getCulcGraphPoint();
-        const point = culcGraphPoint(nearestPrice);
-        const previousPrice = prices[prices.indexOf(nearestPrice) - 1] || null;
-        this.props.onNewPointerPrice({
-            point,
-            price: nearestPrice,
-            previousPrice
-        });
-    }
-
-    handleMouseOut() {
-        this.props.onClearPointerPrice();
-    }
-
     getValueHints() {
-        var valueLimits = this.getValueLimits(),
+        var { valueLimits } = this.props,
             step = (valueLimits.max / (YAXIS_COUNT - 1)),
             result = [];
         for (let index = 0; index < YAXIS_COUNT; index++) {
@@ -88,52 +38,12 @@ class FinancialChartGraph extends Component {
         return result;
     }
 
-    getTimeLimits() {
-        var { data, year } = this.props;
-        const date = new Date(data.prices[0][0]);
-        year = year || date.getFullYear();
-        return {
-            min: new Date(year, 0, 1).getTime(),
-            max: new Date(year + 1, 0, -1).getTime()
-        };
-    }
-
-    getMaxPrice() {
-        var { data : { prices } } = this.props;
-        prices = prices.map(price => price[1]);
-        return Math.max.apply(null, prices);
-    }
-
-    getValueLimits() {
-        return {
-            min: MINIMUM_VALUE,
-            max: $math.getNearestMaxGraphLimit(this.getMaxPrice())
-        };
-    }
-
-
-    getGraphAreaSize() {
-        const { width, height } = this.props;
-        const { left, right, bottom, top } = $boxes.graphArea;
-        return {
-            width: width - right - left,
-            height: height - bottom - top
-        };
-    }
-
     renderGraph() {
-        const timeLimits = this.getTimeLimits();
-        const culcGraphPoint = this.getCulcGraphPoint();
-
-        const { data } = this.props;
-        const d = data.prices.reduce((result, exchangeRate) => {
-            var [ date ] = exchangeRate;
-            if (date <= timeLimits.max && date >= timeLimits.min) {
-                const point1 = culcGraphPoint(exchangeRate);
-                return result + `${result ? ' L' : 'M'} ${point1.x} ${point1.y}`;
-            }
-            return result;
-        }, '');
+        const { points } = this.props;
+        const d = points.reduce(
+            (result, point) =>
+            (result + `${result ? ' L' : 'M'} ${point.x} ${point.y}`)
+        , '');
 
         return (
             <g className="financial-chart__graph">
@@ -170,19 +80,17 @@ class FinancialChartGraph extends Component {
     }
 
     renderYearHint() {
-        const { data } = this.props;
+        const { year } = this.props;
         const { left, bottom } = $boxes.yearHint;
         const { height } = this.props;
         var node = null;
         // По первой дате определяем год.
-        var date = data.prices[0][0];
-        if (date) {
-            date = new Date(date);
+        if (year) {
             node = (
                 <text x={left}
                       y={height - bottom}
                     {...$props.yearHint}>
-                    <tspan>{date.getFullYear()}</tspan>
+                    <tspan>{year}</tspan>
                 </text>
             );
         }
@@ -251,44 +159,12 @@ class FinancialChartGraph extends Component {
         );
     }
 
-    renderHitArea() {
-        const { width, height } = this.getGraphAreaSize();
-        return (
-            <rect onMouseMove={this.handleMouseMove}
-                  onMouseOut={this.handleMouseOut}
-                  className="financial-chart__hit-area"
-                  x="0"
-                  y="0"
-                  width={width}
-                  height={height}
-                  {...$props.hitArea} />
-        );
-    }
-
-    getCulcGraphPoint() {
-        const areaSize = this.getGraphAreaSize();
-        const timeLimits = this.getTimeLimits();
-        const rateLimits = this.getValueLimits();
-
-        return (price) => {
-            var [ date, rate ] = price;
-            // Берём остаток от доли т.к. ось y растет сверху вниз.
-            const datePart = $math.partOfRange(timeLimits.min, timeLimits.max, date);
-            const ratePart = (1 - $math.partOfRange(rateLimits.min, rateLimits.max, rate));
-            return {
-                x: datePart * areaSize.width,
-                y: ratePart * areaSize.height
-            };
-        };
-    }
-
     shouldComponentUpdate(nextProps) {
         return !$collection.equal(nextProps, this.props);
     }
 
     render() {
         const { width, height } = this.props;
-
         return (
             <g>
                 <rect x="0" y="0" width={width} height={height} {...$props.backgroundBox} />
@@ -299,7 +175,6 @@ class FinancialChartGraph extends Component {
                 <g transform={`translate(${$boxes.graphArea.left}, ${$boxes.graphArea.top})`}>
                     {this.renderGraph()}
                     {this.props.children}
-                    {this.renderHitArea()}
                 </g>
             </g>
         );

@@ -10,13 +10,17 @@ import classNames from 'classnames';
 class PriceTicket extends Component {
 
     static propTypes = {
-        pointerPrice: PropTypes.object,
+        point: PropTypes.object,
+        previousPrice: PropTypes.array,
+        pointerPrice: PropTypes.array,
         positionSide: PropTypes.string,
         evaluateCurrency: PropTypes.string
     };
 
     render () {
         const {
+            point,
+            previousPrice,
             pointerPrice,
             evaluateCurrency,
             positionSide
@@ -25,9 +29,8 @@ class PriceTicket extends Component {
         if (pointerPrice) {
             let priceDelta;
             let priceDeltaString;
-            let point = this.props.pointerPrice.point;
-            if (pointerPrice.previousPrice) {
-                priceDelta = pointerPrice.price[1] - pointerPrice.previousPrice[1];
+            if (previousPrice) {
+                priceDelta = pointerPrice[1] - previousPrice[1];
                 priceDeltaString = $float.toString(Math.abs(priceDelta.toFixed(2) || 0));
             }
             return (
@@ -38,11 +41,11 @@ class PriceTicket extends Component {
                      }}>
                     <div className="price-ticket__sub">
                         <div className="price-ticket__date">
-                            {$date.toRussianString(new Date(pointerPrice.price[0]))}
+                            {$date.toRussianString(new Date(pointerPrice[0]))}
                         </div>
                         <div>
                             <PriceText className="price-ticket__price"
-                                       price={pointerPrice.price[1].toFixed(2)}
+                                       price={pointerPrice[1].toFixed(2)}
                                        currency={evaluateCurrency} />
                             <span className={classNames({
                                     'price-ticket__delta': true,
