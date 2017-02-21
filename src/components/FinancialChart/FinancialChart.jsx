@@ -21,17 +21,6 @@ class FinancialChart extends Component {
         onClearPointerPrice: PropTypes.func,
         onNewPointerPrice: PropTypes.func
     };
-
-    /*
-
-        _oldPrices = null;
-        isNewPrices(prices) {
-            const result = this._oldPrices === prices;
-            this._oldPrices = prices;
-            return result;
-        }
-
-    */
     
     constructor(props) {
         super(props);
@@ -39,24 +28,13 @@ class FinancialChart extends Component {
         this.handleMouseOut = this.handleMouseOut.bind(this);
     }
 
-    isTouchEnd = false;
-
     handleMouseMove(e) {
-        if (e.type === 'touchstart') {
-            this.isTouchEnd = false;
-        }
-        if (this.isTouchEnd === true && e.type === 'mousemove') {
-            return;
-        }
         const mousePos = $dom.getMousePos(e);
         const nearestPrice = this.getNearestPrice(mousePos);
         this.props.onNewPointerPrice(nearestPrice);
     }
 
     handleMouseOut(e) {
-        if (e.type === 'touchend') {
-            this.isTouchEnd = true;
-        }
         this.props.onClearPointerPrice();
     }
 

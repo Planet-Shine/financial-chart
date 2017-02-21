@@ -1,13 +1,6 @@
-
-var _isTouchDevice = false;
-
 const $dom = {
-    getCoords(element, isTouch) {
+    getCoords(element) {
         var box = element.getBoundingClientRect();
-        if (isTouch && !_isTouchDevice) {
-            _isTouchDevice = isTouch;
-        }
-        isTouch = _isTouchDevice;
 
         var body = document.body;
         var docEl = document.documentElement;
@@ -18,17 +11,17 @@ const $dom = {
         var clientTop = docEl.clientTop || body.clientTop || 0;
         var clientLeft = docEl.clientLeft || body.clientLeft || 0;
 
-        var top = box.top + (!isTouch ? + scrollTop - clientTop : 0);
-        var left = box.left + (!isTouch ? +  scrollLeft - clientLeft : 0);
+        var top = box.top + scrollTop - clientTop;
+        var left = box.left +  scrollLeft - clientLeft;
 
         return {
-            y: top,
-            x: left
+            y: Math.round(top),
+            x: Math.round(left)
         };
     },
     getMousePos(element, pageMousePosition, isTouch) {
         if (arguments.length >= 2) {
-            let elementCoords = $dom.getCoords(element, isTouch);
+            let elementCoords = $dom.getOffsetSum(element);
             let resultPoint = {
                 x: pageMousePosition.x - elementCoords.x,
                 y: pageMousePosition.y - elementCoords.y
@@ -39,7 +32,7 @@ const $dom = {
         return $dom.getMousePos(event.currentTarget, {
             x: event.pageX || event.touches && (event.touches[0] || {}).pageX,
             y: event.pageY || event.touches && (event.touches[0] || {}).pageY
-        }, event.touches && event.touches.length);
+        });
     }
 };
 
