@@ -21,7 +21,7 @@ const $dom = {
     },
     getMousePos(element, pageMousePosition, isTouch) {
         if (arguments.length >= 2) {
-            let elementCoords = $dom.getOffsetSum(element);
+            let elementCoords = $dom.getCoords(element);
             let resultPoint = {
                 x: pageMousePosition.x - elementCoords.x,
                 y: pageMousePosition.y - elementCoords.y
