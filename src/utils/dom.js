@@ -1,7 +1,13 @@
 
+var _isTouchDevice = false;
+
 const $dom = {
     getCoords(element, isTouch) {
         var box = element.getBoundingClientRect();
+        if (isTouch && !_isTouchDevice) {
+            _isTouchDevice = isTouch;
+        }
+        isTouch = _isTouchDevice;
 
         var body = document.body;
         var docEl = document.documentElement;
