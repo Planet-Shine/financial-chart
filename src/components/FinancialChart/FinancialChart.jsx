@@ -39,15 +39,24 @@ class FinancialChart extends Component {
         this.handleMouseOut = this.handleMouseOut.bind(this);
     }
 
+    isTouchEnd = false;
+
     handleMouseMove(e) {
-        // const { data : { prices } } = this.props;
+        if (e.type === 'touchstart') {
+            this.isTouchEnd = false;
+        }
+        if (this.isTouchEnd === true && e.type === 'mousemove') {
+            return;
+        }
         const mousePos = $dom.getMousePos(e);
         const nearestPrice = this.getNearestPrice(mousePos);
-
         this.props.onNewPointerPrice(nearestPrice);
     }
 
-    handleMouseOut() {
+    handleMouseOut(e) {
+        if (e.type === 'touchend') {
+            this.isTouchEnd = true;
+        }
         this.props.onClearPointerPrice();
     }
 
