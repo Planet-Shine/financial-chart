@@ -39,85 +39,6 @@ class FinancialChart extends Component {
         this.handleMouseOut = this.handleMouseOut.bind(this);
     }
 
-    renderPricePointer() {
-        const { pointerPrice }  = this.props;
-        const point = pointerPrice && this.getCulcGraphPoint()(pointerPrice);
-        return (
-            <g clipPath={`url(#${POINTER_CLIP_ID})`}>
-                <g transform={point ? `translate(${point.x},${point.y})` : 'translate(0,0)'} visibility={point ? 'visible' : 'hidden'}>
-                    <line {...$props.pricePointer.line} />
-                    <circle {...$props.pricePointer.aim} />
-                </g>
-            </g>
-        );
-    }
-
-    renderPointerClip() {
-        const { width, height } = this.props;
-        const { top, left, bottom, right } = $boxes.graphArea;
-        return (
-            <clipPath id={POINTER_CLIP_ID}>
-                <rect x={$props.pointerClip.x}
-                      y={$props.pointerClip.y}
-                      width={width - left - right + $props.pointerClip.additionalWidth}
-                      height={height - top - bottom} />
-            </clipPath>
-        );
-    }
-
-    getPreviousPrice([ targetDate ]) {
-        const { prices } = this.props;
-        const index = prices.findIndex(
-            ([ date ]) =>
-            date === targetDate
-        );
-        return prices[index - 1];
-    }
-
-    renderPriceTicket() {
-        const { width, pointerPrice, evaluateCurrency } = this.props;
-        const { graphArea : {left, right, switchHintSideRightLimit} } = $boxes;
-        const point = pointerPrice && this.getCulcGraphPoint()(pointerPrice);
-        const positionSide =
-                point && (point.x > (width - left - right) - switchHintSideRightLimit)
-                ? 'left' : 'right';
-        const previousPrice = pointerPrice && this.getPreviousPrice(pointerPrice);
-        return (
-            <PriceTicket
-                point={point}
-                previousPrice={previousPrice}
-                positionSide={positionSide}
-                evaluateCurrency={evaluateCurrency}
-                pointerPrice={pointerPrice} />
-        );
-    }
-
-
-    getNearestPrice(mousePos) {
-        const { prices } = this.props;
-        const timeLimits = this.getTimeLimits();
-        const areaSize = this.getGraphAreaSize();
-        const xPart = $math.partOfRange(0, areaSize.width,  mousePos.x);
-        const targetTimestamp = timeLimits.min + parseInt((timeLimits.max - timeLimits.min) * xPart, 10);
-        var nearestPrice = null;
-        var minimalDelta = null;
-
-        prices.forEach((price) => {
-            let delta = Math.abs(price[0] - targetTimestamp);
-            if (nearestPrice !== null) {
-                if (delta < minimalDelta) {
-                    minimalDelta = delta;
-                    nearestPrice = price;
-                }
-            } else { // nearestPrice === null
-                nearestPrice = price;
-                minimalDelta = delta;
-            }
-        });
-
-        return nearestPrice;
-    }
-
     handleMouseMove(e) {
         // const { data : { prices } } = this.props;
         const mousePos = $dom.getMousePos(e);
@@ -128,29 +49,6 @@ class FinancialChart extends Component {
 
     handleMouseOut() {
         this.props.onClearPointerPrice();
-    }
-
-    getGraphAreaSize() {
-        const { width, height } = this.props;
-        const { left, right, bottom, top } = $boxes.graphArea;
-        return {
-            width: width - right - left,
-            height: height - bottom - top
-        };
-    }
-
-    renderHitArea() {
-        const { width, height } = this.getGraphAreaSize();
-        return (
-            <div onMouseMove={this.handleMouseMove}
-                 onMouseOut={this.handleMouseOut}
-                 className="financial-chart__hit-area"
-                 style={{
-                    width,
-                    height
-                 }}>
-            </div>
-        );
     }
 
     getCulcGraphPoint() {
@@ -180,16 +78,25 @@ class FinancialChart extends Component {
         };
     }
 
-    getMaxPrice() {
-        var { prices } = this.props;
-        prices = prices.map(price => price[1]);
-        return Math.max.apply(null, prices);
-    }
-
     getValueLimits() {
         return {
             min: MINIMUM_VALUE,
             max: $math.getNearestMaxGraphLimit(this.getMaxPrice())
+        };
+    }
+
+    getMaxPrice() {
+        var { prices } = this.props;
+        prices = prices.map(price => price[1]);
+        return Math.max.apply(null, prices) || 0;
+    }
+
+    getGraphAreaSize() {
+        const {width, height} = this.props;
+        const {left, right, bottom, top} = $boxes.graphArea;
+        return {
+            width: width - right - left,
+            height: height - bottom - top
         };
     }
 
@@ -208,6 +115,101 @@ class FinancialChart extends Component {
         return points;
     }
 
+    getPreviousPrice([ targetDate ]) {
+        const { prices } = this.props;
+        const index = prices.findIndex(
+            ([ date ]) =>
+            date === targetDate
+        );
+        return prices[index - 1];
+    }
+
+    getNearestPrice(mousePos) {
+        const { prices } = this.props;
+        const timeLimits = this.getTimeLimits();
+        const areaSize = this.getGraphAreaSize();
+        const xPart = $math.partOfRange(0, areaSize.width,  mousePos.x);
+        const targetTimestamp = timeLimits.min + parseInt((timeLimits.max - timeLimits.min) * xPart, 10);
+        var nearestPrice = null;
+        var minimalDelta = null;
+
+        prices.forEach((price) => {
+            let delta = Math.abs(price[0] - targetTimestamp);
+            if (nearestPrice !== null) {
+                if (delta < minimalDelta) {
+                    minimalDelta = delta;
+                    nearestPrice = price;
+                }
+            } else { // nearestPrice === null
+                nearestPrice = price;
+                minimalDelta = delta;
+            }
+        });
+
+        return nearestPrice;
+    }
+
+    renderPricePointer() {
+        const { pointerPrice }  = this.props;
+        const point = pointerPrice && this.getCulcGraphPoint()(pointerPrice);
+        return (
+            <g clipPath={`url(#${POINTER_CLIP_ID})`}>
+                <g transform={point ? `translate(${point.x},${point.y})` : 'translate(0,0)'} visibility={point ? 'visible' : 'hidden'}>
+                    <line {...$props.pricePointer.line} />
+                    <circle {...$props.pricePointer.aim} />
+                </g>
+            </g>
+        );
+    }
+
+    renderPointerClip() {
+        const { width, height } = this.props;
+        const { top, left, bottom, right } = $boxes.graphArea;
+        return (
+            <clipPath id={POINTER_CLIP_ID}>
+                <rect x={$props.pointerClip.x}
+                      y={$props.pointerClip.y}
+                      width={width - left - right + $props.pointerClip.additionalWidth}
+                      height={height - top - bottom} />
+            </clipPath>
+        );
+    }
+
+    renderPriceTicket() {
+        const { width, pointerPrice, evaluateCurrency } = this.props;
+        const { graphArea : {left, right, switchHintSideRightLimit} } = $boxes;
+        const point = pointerPrice && this.getCulcGraphPoint()(pointerPrice);
+        const positionSide =
+                point && (point.x > (width - left - right) - switchHintSideRightLimit)
+                ? 'left' : 'right';
+        const previousPrice = pointerPrice && this.getPreviousPrice(pointerPrice);
+        return (
+            <PriceTicket
+                point={point}
+                previousPrice={previousPrice}
+                positionSide={positionSide}
+                evaluateCurrency={evaluateCurrency}
+                pointerPrice={pointerPrice} />
+        );
+    }
+
+    renderHitArea() {
+        const { width, height } = this.getGraphAreaSize();
+        return (
+            <div onMouseMove={this.handleMouseMove}
+                 onMouseOut={this.handleMouseOut}
+                 onTouchMove={this.handleMouseMove}
+                 onTouchStart={this.handleMouseMove}
+                 onTouchEnd={this.handleMouseOut}
+                 onTouchCancel={this.handleMouseOut}
+                 className="financial-chart__hit-area"
+                 style={{
+                    width,
+                    height
+                 }}>
+            </div>
+        );
+    }
 
     render() {
         const {
